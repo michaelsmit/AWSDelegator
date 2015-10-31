@@ -45,6 +45,15 @@ consumption are based upon usage of associated resources to the user/group.
           5.   It will take up to 24 hours for your first billing document to be saved to the selected bucket.
 
 ## Server Setup
+
+###Pre-requisites
+git, NodeJS and MongoDB. 
+  sudo apt-get install git
+  sudo apt-get install npm
+  sudo apt-get install nodejs
+  sudo apt-get install nodejs-legacy
+  sudo apt-get install mongodb-server
+
 ####Credentials
 In Unix/OSX create folder named .aws in your root folder
 
@@ -55,8 +64,8 @@ For windows, create a folder named .aws in your default user folder. For example
 Within this folder, create a file named credentials with the following saved to it:
 
      [default]
-     aws_access_key_id = “access key id here”
-     aws_secret_access_key = “secret access key here”
+     aws_access_key_id=ABC123
+     aws_secret_access_key=ABCDEF12345
 
 #### Config.js
 Open AWSDelegator/src/server/config.js and set the following four values:
