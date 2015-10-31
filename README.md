@@ -103,6 +103,8 @@ Optionally, credits, creditExp, and creditsUsed can be configured if you are usi
      2. npm install
      3. npm install grunt-cli -g
      4. node setup.js
+     
+After running setup, move the data directory to the src directory.
 
  Every time you dev run these:
  
