@@ -48,11 +48,12 @@ consumption are based upon usage of associated resources to the user/group.
 
 ###Pre-requisites
 git, NodeJS and MongoDB. 
-  sudo apt-get install git
-  sudo apt-get install npm
-  sudo apt-get install nodejs
-  sudo apt-get install nodejs-legacy
-  sudo apt-get install mongodb-server
+
+     sudo apt-get install git
+     sudo apt-get install npm
+     sudo apt-get install nodejs
+     sudo apt-get install nodejs-legacy
+     sudo apt-get install mongodb-server
 
 ####Credentials
 In Unix/OSX create folder named .aws in your root folder
