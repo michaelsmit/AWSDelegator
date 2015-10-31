@@ -46,7 +46,7 @@ consumption are based upon usage of associated resources to the user/group.
 
 ## Server Setup
 
-###Pre-requisites
+####Pre-requisites
 git, NodeJS and MongoDB. 
 
      sudo apt-get install git
