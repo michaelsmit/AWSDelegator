@@ -10,8 +10,9 @@ exports.checkBudgets = function() {
     MongoClient.connect(databaseUrl, function(err, db) {
         if (err) throw err;
         mongoose.model('Budgets').find({}, function(e, budgets) {
+            // console.log("hehe",budgets)
             if (e) throw e;
-            var index1 = 0;
+            var index = 0;
             var budgetController = function() {
                 budgetIterator(function() {
                     index++;
@@ -22,6 +23,7 @@ exports.checkBudgets = function() {
             };
             var budgetIterator = function(callback1) {
                 var budget = budgets[index];
+
                 //checking for amount exceeded or time exceeded
                 getBudgetTotalCost(budgets[index].BatchType, budgets[index].BatchName, budgets[index].StartDate, budgets[index].EndDate,
                     function(result) {
@@ -43,8 +45,8 @@ exports.checkBudgets = function() {
                                         if (err) throw err;
                                         console.log('Added a notification for ', budget.BudgetName);
                                         //Check for stop the instance here
-                                        if (budget.TimeOut == "true") {
-                                            console.log('CHECKING');
+                                        if (budget.timeout == 'true') {
+                                            console.log("Stopping instance as requested...")
                                             stopInstances(budgets[index].BatchType, budgets[index].BatchName);
                                         }
                                         callback1();
@@ -68,8 +70,9 @@ exports.checkBudgets = function() {
                                     }, function(err) {
                                         if (err) throw err;
                                         console.log('Added a notification', budget.BudgetName)
-                                            //Also stop the instance here
-                                        if (budget.TimeOut == "true") {
+                                        //Also stop the instance here
+                                        if (budget.timeout == 'true') {
+                                            console.log("Stopping instance as requested...")
                                             stopInstances(budgets[index].BatchType, budgets[index].BatchName);
                                         }
                                         callback1();
@@ -242,7 +245,6 @@ var getBudgetTotalCost = function(_batchtype, _batchname, _startdate, _enddate, 
     var batchName = _batchname;
     var startDate = _startdate;
     var endDate = _enddate;
-
     if (batchType == 'user') {
         mongoose.model('Billings').aggregate([{
             $match: {
@@ -278,7 +280,9 @@ var getBudgetTotalCost = function(_batchtype, _batchname, _startdate, _enddate, 
                 _id: 1
             }
         }]).exec(function(e, d) {
-            callback(d);
+            if(d.length > 0) {
+                callback(d);
+            }
         });
     } else { // If group instead
         mongoose.model('Billings').aggregate([{
@@ -323,7 +327,9 @@ var getBudgetTotalCost = function(_batchtype, _batchname, _startdate, _enddate, 
                 }
             }])
             .exec(function(e, d) {
-                callback(d);
+                if(d.length > 0) {
+                    callback(d);
+                }
             });
     }
     // return 0;

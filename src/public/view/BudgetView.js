@@ -69,9 +69,10 @@ var BudgetView = Backbone.View.extend({
             this.$('.sub-costfilter').show();
             $('#filter-details').removeClass('hidden');
             if (selected == 'group') {
-                self.model.getGroups();
+                self.model.getActiveGroups();
             } else {
-                self.model.getUsers();
+                // self.model.getUsers();
+                self.model.getActiveUsers();
             }
         }.bind(this));
 
@@ -212,7 +213,7 @@ var BudgetView = Backbone.View.extend({
             for (var i in self.isValid) {
                 if (!self.isValid[i]) {
                     validForm = false;
-                    // console.log("invalid", i);
+                    console.log("invalid");
                 }
             }
 

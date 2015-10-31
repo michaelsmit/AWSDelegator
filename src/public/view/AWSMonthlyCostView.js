@@ -1,3 +1,4 @@
+
 var AWSMonthlyCostView = Backbone.View.extend({
     className: 'AWSMonthlyCostView',
 
@@ -33,7 +34,7 @@ var AWSMonthlyCostView = Backbone.View.extend({
                         type: 'column'
                     },
                     title: {
-                        text: 'Monthly Data'
+                        text: 'AWS Monthly Breakdown'
                     },
                     xAxis: {
                         categories: month
